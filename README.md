@@ -1,10 +1,2 @@
-README.md oluşturuldu
-ve güncellendi
-yeni kodlar yazıldı.
-dosyada değişiklikler yapılıyor
-1
-2
-3
-
-
-Yeni branch açıldı ve test kodları yazılıyor.
+## Hakkımda 
+- **İnönü Üniversitesi Yazılım Mühendisliği 3. sınıf öğrencisiyim. Flutter/Dart, Python/FastAPI, Java/Spring Boot ve Docker ile hackathon, bootcamp ve Teknofest kapsamındaki takım projelerinde uçtan uca yapay zekâ destekli mobil ve web uygulamaları geliştirdim.**
