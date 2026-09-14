@@ -65,6 +65,8 @@ class SiparisYoneticisi implements ISiparisIslemleri {
   /*SOLİD İHLALİ- DIP/bağımlılığı tersine çevirme ilkesi;
   ust seviye modul olan SiparisYoneticisi,soyutlamlar yerine somut alt seviye 
   sınıflara doğrudan bağımlı ,bu yüzdenservisleri değiştirmek için bu sınıfın kendisi değiştirilir.
+  
+  
    */
   SqliteVeritabani db = SqliteVeritabani();
   SmtpMailServisi mailci = SmtpMailServisi();
