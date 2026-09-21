@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SoundWave Pro - Ürün Tanıtımı</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f1f5f9;
+        color: #1e293b;
+        padding: 20px;
+        max-width: 560px;
+        margin: auto;
+    }
+    .card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    h1 { font-size: 22px; margin-bottom: 4px; }
+    .subtitle { color: #64748b; font-size: 13px; margin-bottom: 16px; }
+    h3 { margin-bottom: 12px; }
+    video, iframe {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 8px;
+        border: none;
+        display: block;
+        margin-bottom: 10px;
+    }
+    label { display:block; font-weight:bold; font-size:13px; margin-bottom:6px; }
+    meter { width: 100%; height: 22px; }
+    .hint { font-size: 12px; color:#64748b; margin-top:6px; }
+    details {
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    summary { font-weight: bold; cursor: pointer; color:#1e40af; }
+    details[open] { background:#eff6ff; }
+    details p { font-size:13px; color:#334155; margin-top:8px; }
+    .btn-primary {
+        background:#1e40af;
+        color:white;
+        border:none;
+        padding:12px 18px;
+        border-radius:6px;
+        font-weight:bold;
+        cursor:pointer;
+        width:100%;
+    }
+    dialog {
+        border:none;
+        border-radius:12px;
+        padding:24px;
+        max-width:340px;
+        box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    }
+    dialog::backdrop { background: rgba(15,23,42,0.6); }
+    dialog h3 { margin-top:0; }
+    dialog .spec { font-size:13px; margin-bottom:6px; color:#334155; }
+    .btn-close {
+        margin-top:16px;
+        background:#334155;
+        color:white;
+        border:none;
+        padding:8px 14px;
+        border-radius:6px;
+        cursor:pointer;
+    }
+</style>
+</head>
+<body>
+
+    <!-- Başlık -->
+    <div class="card">
+        <h1>SoundWave Pro Kablosuz Kulaklık</h1>
+        <p class="subtitle">Aktif gürültü engelleme ve 30 saat pil ömrü</p>
+    </div>
+
+    <!-- GEREKLİLİK 1: Tanıtım videosu — hem <video playsinline> hem <iframe> -->
+    <div class="card">
+        <h3>Ürün Tanıtım Videosu</h3>
+        <!-- playsinline: mobilde videonun otomatik tam ekrana sıçramadan, sayfa içinde oynamasını sağlar -->
+        <video playsinline controls preload="metadata">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+            Tarayıcınız video etiketini desteklemiyor.
+        </video>
+        <p class="hint">Yukarısı yerel &lt;video&gt; oynatıcı — kendi ürün videonuzun linkiyle değiştirebilirsiniz.</p>
+
+        <iframe
+            src="https://www.youtube.com/embed/M7lc1UVf-VE"
+            title="SoundWave Pro tanıtım videosu"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+        </iframe>
+        <p class="hint">Yukarısı YouTube üzerinden &lt;iframe&gt; ile gömülü ikinci video — kendi embed linkinizle değiştirin.</p>
+    </div>
+
+    <!-- GEREKLİLİK 2: Stok durumu göstergesi -->
+    <div class="card">
+        <h3>Stok Durumu</h3>
+        <label for="stokMeter">Kalan ürün sayısı: 8 adet</label>
+        <meter id="stokMeter" value="8" min="0" max="50" low="10" high="30" optimum="50"></meter>
+        <p class="hint">Stok kritik seviyenin altında olduğu için tarayıcı bunu otomatik olarak <strong>kırmızı</strong> renkte gösterir.</p>
+    </div>
+
+    <!-- GEREKLİLİK 3: Sıkça sorulan sorular (en az 2 madde) -->
+    <div class="card">
+        <h3>Sıkça Sorulan Sorular</h3>
+        <details open>
+            <summary>Kargo ne zaman elime ulaşır?</summary>
+            <p>Siparişler aynı gün kargoya verilir, ortalama teslimat süresi 1-3 iş günüdür.</p>
+        </details>
+        <details>
+            <summary>Garanti süresi ne kadar?</summary>
+            <p>Ürün 2 yıl üretici garantisi kapsamındadır.</p>
+        </details>
+        <details>
+            <summary>Su geçirmez mi?</summary>
+            <p>IPX4 sertifikasına sahiptir, hafif yağmur ve tere karşı dayanıklıdır.</p>
+        </details>
+    </div>
+
+    <!-- GEREKLİLİK 4: "Detaylı Bilgi Al" butonu -> dialog modal -->
+    <div class="card">
+        <button class="btn-primary" onclick="document.getElementById('detayModal').showModal()">
+            Detaylı Bilgi Al
+        </button>
+    </div>
+
+    <dialog id="detayModal">
+        <h3>SoundWave Pro — Teknik Özellikler</h3>
+        <div class="spec">🔋 Pil ömrü: 30 saat (kutu ile 120 saat)</div>
+        <div class="spec">🎧 Bluetooth: 5.3</div>
+        <div class="spec">🔇 Aktif gürültü engelleme: Var</div>
+        <div class="spec">💧 Su direnci: IPX4</div>
+        <div class="spec">⚖️ Ağırlık: 245g</div>
+        <button class="btn-close" onclick="document.getElementById('detayModal').close()">Kapat</button>
+    </dialog>
+
+</body>
+</html>
