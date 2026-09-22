@@ -1,0 +1,254 @@
+:root {
+  --ink: #121110;
+  --paper: #eef0e9;
+  --surface: #ffffff;
+  --accent: #ff4b1f;      /* enerjik turuncu-kırmızı — spor markası hissi */
+  --accent-soft: #ffe1d2;
+  --success: #1c8a4b;
+  --success-bg: #e3f4e8;
+  --muted: #767b73;
+  --border: #dfe1d8;
+}
+
+/* 1) ZORUNLU KRİTER: box-sizing sıfırlama
+   Bu kural olmasaydı, bir kutuya padding veya border eklediğimizde
+   kutunun toplam genişliği büyürdü. border-box sayesinde padding/border
+   kutunun İÇİNDEN pay alır, dışarı taşmaz. */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: 'Inter', -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #e4e6dd;
+  color: var(--ink);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.page {
+  width: 100%;
+  max-width: 480px; /* ZORUNLU KRİTER: mobil uyumluluk */
+  background: var(--paper);
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 96px; /* alt sabit bar içeriğin üstüne binmesin diye boşluk */
+}
+
+/* 2) ZORUNLU KRİTER: sticky mobil menü çubuğu
+   "sticky" normalde sayfayla birlikte akar, ama tanımladığımız
+   eşiğe (top:0) ulaşınca yapışıp orada kalır. */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: rgba(238, 240, 233, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Bricolage Grotesque', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+.logo-mark {
+  width: 30px; height: 30px; border-radius: 8px 8px 8px 2px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 15px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+.top-icons { display: flex; gap: 10px; }
+.icon-btn {
+  position: relative; /* rozet (cart-count) bu elemana göre konumlanacak */
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; cursor: pointer;
+}
+.cart-count {
+  position: absolute;
+  top: -5px; right: -5px;
+  min-width: 17px; height: 17px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 3px;
+}
+
+.breadcrumb {
+  padding: 14px 20px 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* 3) ZORUNLU KRİTER: rozetler için position: absolute
+   absolute konumlanan eleman, "position: relative" olan en yakın
+   ebeveynine göre konumlanır. Burada o ebeveyn .product-media'dır. */
+.product-media {
+  margin: 16px 20px 0;
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255,255,255,.55), transparent 55%),
+    repeating-linear-gradient(115deg, var(--accent-soft), var(--accent-soft) 42px, #eee0cf 42px, #eee0cf 84px);
+  aspect-ratio: 1 / 0.95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-media .icon {
+  font-size: 104px;
+  filter: drop-shadow(0 14px 18px rgba(18, 17, 16, 0.18));
+}
+.badge {
+  position: absolute;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 7px 16px 7px 12px;
+  color: #fff;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+}
+.badge-discount { top: 16px; left: 16px; background: var(--accent); }
+.badge-shipping {
+  bottom: 16px; right: 16px;
+  background: var(--success);
+  display: flex; align-items: center; gap: 5px;
+  padding: 7px 14px 7px 16px;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+}
+
+.product-info { padding: 20px 20px 0; }
+.product-info h1 {
+  font-family: 'Bricolage Grotesque', 'Inter', sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.rating {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13.5px; color: var(--muted);
+  margin-bottom: 14px;
+}
+.stars { color: #f5a524; letter-spacing: 1px; }
+.price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+.price-now { font-family: 'Bricolage Grotesque', sans-serif; font-size: 27px; font-weight: 800; color: var(--ink); }
+.price-old { font-size: 15px; color: var(--muted); text-decoration: line-through; }
+.desc { font-size: 13.5px; line-height: 1.6; color: #454943; margin-bottom: 22px; }
+
+.selector-label {
+  display: flex; justify-content: space-between;
+  font-size: 13.5px; font-weight: 600; margin-bottom: 10px;
+}
+.selector-label span:last-child { color: var(--muted); font-weight: 400; }
+
+/* 4) ZORUNLU KRİTER: numara/beden çip listesi
+   flex-wrap: wrap → satır dolunca yeni satıra geçer.
+   gap: 8px → çipler arasına margin yazmadan boşluk bırakır. */
+.size-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.size-chip {
+  min-width: 46px;
+  padding: 10px 6px;
+  text-align: center;
+  border-radius: 9px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  font-size: 13.5px; font-weight: 600;
+  cursor: pointer;
+  transition: background .12s ease, border-color .12s ease, color .12s ease;
+}
+.size-chip.selected { background: var(--accent); border-color: var(--accent); color: #fff; }
+.size-chip.disabled { color: #c7cbc1; text-decoration: line-through; cursor: not-allowed; }
+
+.trust-box {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--success-bg);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 26px;
+}
+.trust-box .t-icon { font-size: 20px; }
+.trust-box strong { display: block; font-size: 13.5px; margin-bottom: 2px; }
+.trust-box p { font-size: 12.5px; color: #454943; }
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding: 16px 20px 30px;
+}
+.tabs span {
+  font-size: 13px; font-weight: 600; color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.tabs span.active { background: var(--ink); color: #fff; }
+
+/* 5) ZORUNLU KRİTER: fixed alt bar
+   "fixed" sayfa kaydırılsa bile ekrana kilitli kalır (viewport'a göre).
+   left:50% + translateX(-50%) ikilisi barı, geniş ekranlarda bile
+   480px'lik "telefon" çerçevesinin ortasında tutar. */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  justify-content: space-between; /* fiyat solda, buton sağda */
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -8px 24px rgba(18, 17, 16, 0.08);
+}
+.bottom-bar .price-block span { display: block; }
+.bottom-bar .label { font-size: 11px; color: var(--muted); }
+.bottom-bar .amount { font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 800; }
+.add-cart-btn {
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 14px 24px;
+  border-radius: 14px;
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.add-cart-btn.added { background: var(--success); }
+
+@media (max-width: 380px) {
+  .product-media .icon { font-size: 86px; }
+  .price-now { font-size: 22px; }
+}
