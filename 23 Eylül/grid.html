@@ -36,6 +36,7 @@
             color: var(--text);
             text-align: center;
             letter-spacing: -0.5px;
+            margin-bottom: 24px;
         }
         .metric-grid{
             display: grid;
@@ -53,8 +54,8 @@
             display:flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 16px;
-            transition: all 0.2s ease;
+            min-height: 160px;
+            transition: "transform", "border-color", "box-shadow" 0.2s ease;
         }
         .metric-card:hover{
             transform: translateY(-4px);
@@ -83,6 +84,9 @@
             align-items: center;
             gap: 4px;
         }
+        .card-growth.warn{
+            color: var(--accent);
+        }
     </style>
 </head>
 
@@ -104,13 +108,13 @@
         <div class="metric-card">
             <span class="card-label">GİB Eşu Bildirimi</span>
             <div class="card-num">Hatırlatma:0 Hata</div>
-            <span class="card-growth" style="color: var(--accent);">Şuanda Xades ve Ves Onaylı</span>
+            <span class="card-growth" >Şuanda Xades ve Ves Onaylı</span>
         </div>
 
         <div class="metric-card">
             <span class="card-label">Ortalama şarj süresi</span>
             <div class="card-num">36.5 DK</div>
-            <span class="card-growth">120Kw Dc hızlı şarj</span>
+            <span class="card-growth.warn">120Kw Dc hızlı şarj</span>
         </div>
     </div>
 
