@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şarj Ağı Metrik Paneli</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0b0c10;
+            --card-bg: #15161c;
+            --border: #262832;
+            --text: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --accent: #f59c0b;
+            --success: #10b981;
+            --radius: 16px;
+            --gap: 18px;
+            --glass-bg: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            padding: 12px 20px 40px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(245, 156, 11, 0.35), transparent 40%),
+                radial-gradient(circle at 85% 65%, rgba(16, 185, 129, 0.30), transparent 45%);
+        }
+
+        
+        .glass-header {
+            position: sticky;
+            top: 12px;
+            z-index: 10;
+            max-width: 1100px;
+            margin: 0 auto 32px;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.35);
+                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--gap);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        
+        @media (min-width: 768px) {
+            .metric-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .metric-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-6px);
+            border-color: #3f3f46;
+            box-shadow: 0 16px 28px -8px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .card-num {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .card-note {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .card-note.warn {
+            color: var(--accent);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .pulse-dot,
+            .metric-card {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="glass-header">
+        <strong>Şarj Ağı Paneli</strong>
+        <span class="live-badge"><span class="pulse-dot"></span>Canlı veri</span>
+    </header>
+
+    <h1>Şarj Ağı Metrik Paneli</h1>
+    <p class="subtitle">CSS Grid, mobile-first sütunlar ve glassmorphism</p>
+
+    <main class="metric-grid">
+        <article class="metric-card">
+            <span class="card-label">Anlık şarj istasyonu</span>
+            <div class="card-num">125 soket</div>
+            <span class="card-note">%92,4 aktif doluluk</span>
+        </article>
+
+        <article class="metric-card">
+            <span class="card-label">Bugünkü tüketim</span>
+            <div class="card-num">4.850 kWh</div>
+            <span class="card-note">Dünden %12 fazla</span>
+        </article>
+
+        <article class="metric-card">
+            <span class="card-label">Ortalama şarj süresi</span>
+            <div class="card-num">36,5 dk</div>
+            <span class="card-note">120 kW DC hızlı şarj</span>
+        </article>
+
+        <article class="metric-card">
+            <span class="card-label">Bildirim durumu</span>
+            <div class="card-num">0 hata</div>
+            <span class="card-note warn">Tüm bildirimler onaylı</span>
+        </article>
+    </main>
+</body>
+
+</html>
