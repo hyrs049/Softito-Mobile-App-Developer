@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS İlk Ders</title>
+</head>
+<body>
+
+    <script>
+        /*
+        // 1. var felaketi parantez dinlemez dışarıya sızar
+        if(true){
+            var tehlikeliSayi=999;
+        }
+        console.log("var sızdı mı?",tehlikeliSayi);
+        //2. let ve const kalkanı:Süslü paranetz bir oda çıkış yasak çıkamaz
+        if(true){
+            let guvenliSayi=42;
+            const PI=3.1415;
+            console.log("oda içi",guvenliSayi,PI);
+        }
+        //console.warn(guvenliSayi);
+
+      //3. Const değiştirilmezlik kuralı
+      const API_URL="https://www.kodusta.com/v1";
+      console.log(API_URL);
+      //let API_URL="tekrar eden link";
+       //Dikkat EDİN BURAYA
+       const arac={marka:"Togg",model:"T10x"};
+       console.log(arac);
+       arac.renk="Beyaz";
+       console.log(arac);
+       /// B u yasak kullanamazsın
+       arac={baska:"obje"};
+       console.log(arac);
+       
+       */
+
+ // VERİ TPLERİ & TİP DÖNÜŞÜMÜ
+/*
+   const isim="Selahaddin"; // String
+   const bataryaKapasite=88.5;//Number(float/int)
+   const sarjTamamlandi=false; // boolean
+   let sonrakiRandevu;     //undefined (kutu var içi boş)
+   const servisNotu=null;   // null bilinçli olarak boş bırakılan değer
+    const büyükSayi=64727638268745238n; // BigInt
+    const gizliAnahtar=Symbol("id"); //Symbol
+
+    console.log(typeof isim);
+    console.log(typeof bataryaKapasite);
+    console.log(typeof sarjTamamlandi);
+    console.log(typeof sonrakiRandevu);
+    console.log(typeof servisNotu);
+
+
+    
+*/
+
+
+/// Otomatik TİP Çevrimi
+/*
+         console.log("5"+2); /// + işareti metin birleştirme yapar
+         console.log("5"-2); // - işareti zorlayarak stringi sayıya çevirir
+         console.log("5"*"4");  // çarpma işemi sayıya çevirir
+         console.log("bes"*2);    //NaN not a number hatası alırızz 
+
+
+*/
+/*
+console.log(typeof NaN);
+console.log(NaN===NaN);
+console.log(Number.isNaN(NaN));
+
+*/
+
+
+
+
+  // manuel tip dönüştürme (profesyonel yolu)
+  /*const stringFiyat="1473.33";
+  const sayiFiyat=Number(stringFiyat);
+  const pixelDegeri=parseInt("48px",10);
+  const metinSayi=String(2026);
+  console.log(stringFiyat)
+  console.log(sayiFiyat)
+  console.log(pixelDegeri)
+  console.log(metinSayi)
+
+
+*/
+
+
+// Katı Eşitlik
+// Neden her zman === kullanmalıyız?
+/*console.log(5=="5"); //true (gevşek eşitlik tipi zorla çevirir asla kullanma)
+console.log(5==="5"); //false 
+
+console.log(0==false); //true verir(gevşek eşitlik felaket)
+console.log(0===false); //false 
+console.log(null==undefined); //true
+console.log(null===undefined); //false
+
+
+*/ 
+// Template Literals
+/*const kullanici="Ersa Ergün";
+const bakiye=1000;
+const harcama=1000;
+const eskiMesaj="Sayın "+ kullanici +", Kalan Bakiyeiz:"+ (bakiye-harcama) +"TL'dir."
+console.log(eskiMesaj);
+
+//Moder e6 Standartları
+const modernMesaj=`Sayın ${kullanici},
+Bugünkü Harcamanız: ${harcama}£,
+Kalan Bakiyeniz: ${bakiye-harcama}£
+Durum:${bakiye-harcama>1000 ?"Güvenli Bakiye":
+"Kritik Bakiye"}`;
+console.log(modernMesaj);
+
+*/ 
+
+   /*const bataryaSeviyesi=30;
+   const istasyonUygunmu=true;
+   const bakiyeTl=100;
+   const minimumGirisTutari=500;
+
+   if(!istasyonUygunmu){
+    console.log('İstasyon şuanda Servis dışı veya mesgul');
+
+   }else if(bakiyeTl<minimumGirisTutari){
+    console.log(`bakiyeyetersiz! en az${minimumGirisTutari}gereklidir.Mevcut: ${bakiyeTl} £`);
+
+   }else if(bataryaSeviyesi<=20){
+    console.log("Kirtik Seviye Ultra hızlı DC şarj Moduna geçiliyor");
+
+   }else{
+    console.log("Standart Şarj Başlatılabilir.");
+
+   }
+*/
+
+
+
+// JSde şu 6 değer false olarak kabul edilir
+// false,0,"",null,undefinded,NaN
+//bunun dışındaki HERŞEY [] boş dizi OLARA true olarak kabul edilir
+
+/*const kullaniciGirdisi=0;
+if(kullaniciGirdisi){
+    console.log("Girdi dolu");
+
+    
+}else{
+    console.log("Girdi Boş");
+}
+
+*/
+
+/*
+//arrow fonksiyon
+//klasik fonksiyon
+function toplaKlasik(sayi1,sayi2){
+    return sayi1+ sayi2;
+}
+//modern fonksiyon (es6 standartlarıyla)
+const toplaModern=(sayi1,sayi2)=>{
+    return sayi1+ sayi2;
+}
+const toplaKisa=(sayi1,sayi2)=>sayi1+sayi2;
+//tek parametreli
+const karesiniAl=sayi=> sayi * sayi;
+
+
+const profilUret=(ad,rol)=>({
+    ad:ad,
+    rol:rol,
+    kayitTrihi:2026
+});
+console.log("Toplama Sonucu", toplaKlasik(15,27));
+console.log("Toplama Sonucu",toplaModern(15,27));
+console.log("Toplama Sonucu",toplaKisa(15,27));
+console.log(karesiniAl(8));
+console.log("Profil",profilUret("Tuba","Öğrenci"));
+
+// meydan okuma konusu indirimli sepet tutarıHesaplayıcı
+
+const indirimHesapla=(indirimTutari)=>(tutar-tutar*(indirimTutari/100));
+console.log("Ödenecek Tutar:",indirimHesapla())
+
+*/
+
+//Meydan okuma konusu şarj süresini dakika cinsinden tahmin edecek 
+// //verilecek değerler mevcut yüzde,hedef yüzde bataryaKw,istasyonKw
+
+const sarjSuresiHesapla=(mevcutYuzde,hedefYuzde,bataryaKw,istasyonKw)=>{
+    const eksikEnerji=bataryaKw *(hedefYuzde-mevcutYuzde)/100;
+    const sureSaat=eksikEnerji/istasyonKw;
+    const sureDakika=sureSaat*60;
+    return sureDakika;
+
+};
+console.log("Tahmini şarj süresi:",sarjSuresiHesapla(10,90,45,50),"dakika");
+ // gece gündüz tarifesi ve fiyatlandırma tarifesi yazcağız ve yapay zeka kullnamadan yazaağız
+ //bilgisayarın saatine göre saati okuyup ,ona göre bir fiyatlandırma yapılacak yapay zeka kullanılmayacak 
+
+ 
+</script>
+    
+</body>
+</html>
