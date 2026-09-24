@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödev</title>
+</head>
+<body>
+    <script>
+        //1.Soru ;Meydan okuma konusu şarj süresini dakika cinsinden tahmin edecek 
+    //verilecek değerler mevcut yüzde,hedef yüzde bataryaKw,istasyonKw
+        const sarjSuresiHesapla=(mevcutYuzde,hedefYuzde,bataryaKw,istasyonKw)=>{
+             const eksikEnerji=bataryaKw *(hedefYuzde-mevcutYuzde)/100;
+             const sureSaat=eksikEnerji/istasyonKw;
+             const sureDakika=sureSaat*60;
+             return sureDakika;
+
+        };
+        console.log("Tahmini şarj süresi:",sarjSuresiHesapla(10,90,45,50),"dakika");
+
+
+        //2. Soru Fiyat Hesabı Yap;
+             const sarjSuresiHesapla2=(mevcutYuzde,hedefYuzde,bataryaKw,istasyonKw)=>{
+             const eksikEnerji=bataryaKw *(hedefYuzde-mevcutYuzde)/100;
+             const sureSaat=eksikEnerji/istasyonKw;
+             const sureDakika=sureSaat*60;
+             return sureDakika;
+
+        };
+        console.log("Tahmini şarj süresi:",sarjSuresiHesapla2(10,90,45,50),"dakika");
+        /*şarj süresini dakika cinsinden hesapladığımız için dakika başı bir fiyat belirleriz ve fonksiyonu şöyle yazarız:
+         önce dakikaFiyati=4 olsun mesela sarjsüresihesapla fonksiyonunu çağırıp şarj süresihesapla*dakikaFiyat yapıp fiyatı buluruz
+          ama  eğer if else koşulu eklemekistersek mesela her 1 saatte %10 zamlansın gibi yapabiliriz*/
+        const fiyatHesapla=(dakikaFiyati)=>{
+            if(sarjSuresiHesapla2<=0){
+              console.log("Şarjı dolu ücret alınmayacak");
+              fiyat=0;
+            }else{
+                
+                fiyat=sarjSuresiHesapla2*dakikaFiyati;
+            }
+            return fiyat;
+        };
+        console.log("Müşterinin ödemesi gereken ücret:",fiyatHesapla(4),"$");
+        //3. Soru Gce gündüz tarifesi ekleyip fiyatlandırmayı ona göre yap
+       /* bu soruyu da yukarıdaki fiyet hesaapla fonksiyonu gibi yapacağız ama if else biraz daha farklı olacak
+       mesela sbahları(05.00-16.59) arasında dakika başı 8 tl alacaksak ,geceleri(17.00-04.59) dakika başı 6tl alınacak
+        ve bunu hesaplayabilmemiz için şarja takılan saat ve şarjdan çıkarılan  saat girdi olarak kullanıcı tarafından verilir,
+        soruda adım adım yapalım*/
+        //önce şarj süresi bulunur
+        const sarjSuresiHesapla3=(mevcutYuzde,hedefYuzde,bataryaKw,istasyonKw)=>{
+             const eksikEnerji=bataryaKw *(hedefYuzde-mevcutYuzde)/100;
+             const sureSaat=eksikEnerji/istasyonKw;
+             const sureDakika=sureSaat*60;
+             return sureDakika;
+
+        };
+        console.log("Tahmini şarj süresi:",sarjSuresiHesapla3(10,90,45,50),"dakika");
+        //sonra hangi saatlerde şarj edildiğini bulmak için saat hesapla fonksiyonu devreye girer ,aslında ben yukarıda 
+        //soruyu çözmek için şarja takılan saat ve çıkarılan saat kullanıcıdan alınır dedim ama böyle olursa soru ortadan kalkar çünkü bir aracın şaerj süresini hesaplayıp ardından gece gündüz tarifesi ile fiatlandıracaktık,
+        //şimdi sorunun bu kısmını şöyle yapacağız kullanıcıdan sadece şarja taktığı saati alacağız ve süreyi zaten yukarıda hesapladık 
+        //şarja takılan saate bu süreyi eklediğimizde (05.00-16-59)arasındaysa sabah tarifesi uygulayıp 8 tlden fiyatlandıracağız
+        //eğer bu süre akşam saatleri içerisine giriyorsa da akşam saatleri üzerinden fiyatlandıracapız
+      
+       const saatHesapla=(sarjaTakilanSaat,sarjaTakilanDakika)=>{
+          if(sarjSuresiHesapla3>=60){
+            const sarjaTakilanSaat = sarjaTakilanSaat+ (sarjSuresiHesapla3/ 60) ;
+            sarjSuresiHesapla3=sarjSuresiHesapla3 % 60;
+            sarjaTakilanDakika=sarjSuresiHesapla3;
+
+            if((sarjaTakilanSaat>=5 && sarjaTakilanSaat<=16)|| (sarjaTakilanDakika>=0 && sarjaTakilanDakika<=59)){
+                const fiyatHesapla2=(gunduzFiyat)=>{
+                  fiyat=sarjSuresiHesapla*gunduzFiyat;
+                  console.log=("Ödenmesi gereken fiyat:",fiyatHesapla2(8),"tl");
+                }
+            }else{
+                const fiyatHesapla2=(geceFiyat)=>{
+                    fiyat=sarjSuresiHesapla*geceFiyat;
+                    console.log=("Ödenmesi gereken fiyat:",fiyatHesapla2(6),"tl");
+
+                }
+            }
+            
+          }else{
+            sarjaTakilanDakika=sarjaTakilanDakika+sarjSuresiHesapla3;
+
+            if((sarjaTakilanSaat>=5 && sarjaTakilanSaat<=16)|| (sarjaTakilanDakika>=0 && sarjaTakilanDakika<=59)){
+                const fiyatHesapla2=(gunduzFiyat)=>{
+                  fiyat=sarjSuresiHesapla*gunduzFiyat;
+                  console.log=("Ödenmesi gereken fiyat:",fiyatHesapla2(8),"tl");
+                }
+            }else{
+                const fiyatHesapla2=(geceFiyat)=>{
+                    fiyat=sarjSuresiHesapla*geceFiyat;
+                    console.log=("Ödenmesi gereken fiyat:",fiyatHesapla2(6),"tl");
+                }
+            }
+            
+          }
+          
+       }
+     
+
+    </script>
+    
+</body>
+</html>
