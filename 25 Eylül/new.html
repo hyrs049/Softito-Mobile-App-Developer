@@ -324,6 +324,8 @@
             { id: 4, name: "Bulaşık Makinası", category: "Mutfak", price: 10000 },
             { id: 5, name: "Ocak", category: "Mutfak", price: 15000 }
         ];
+        
+        let nextId = orders.length + 1;
 
         //dom elementleri toplayalım
         const orderContainer = document.getElementById('orderContainer');
@@ -333,7 +335,9 @@
         const kpiCount = document.getElementById('kpiCount');
         const kpiTotal = document.getElementById('kpiTotal');
         const kpiAvg = document.getElementById('kpiAvg');
-
+        const prodName = document.getElementById('prodName');
+        const prodCat = document.getElementById('prodCat');
+        const prodPrice = document.getElementById('prodPrice');
 
         const updateKPIs = (dataList) => {
             kpiCount.textContent = dataList.length;
@@ -414,11 +418,38 @@
 
 
         }
+             orderForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const newOrder = {
+                id: nextId++,
+                name: prodName.value.trim(),
+                category: prodCat.value,
+                price: Number(prodPrice.value)
+            };
+
+            orders.push(newOrder);
+
+            orderForm.reset();
+            renderOrders();
+        });
+
+        orderContainer.addEventListener("click", (e) => {
+            if (e.target.dataset.action === "delete") {
+                const item = e.target.closest(".order-item");
+                const id = Number(item.dataset.id);
+
+                orders = orders.filter(order => order.id !== id);
+
+                renderOrders();
+            }
+        });
 
         searchInput.addEventListener("input",renderOrders);
         categoryFilter.addEventListener("change",renderOrders);
 
         renderOrders();
+
     </script>
 
 
